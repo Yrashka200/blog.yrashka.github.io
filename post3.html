@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Programmers Should Take Notes — Yrashka's blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="index.html" class="site-title">Yrashka's blog</a>
+                    <nav class="nav">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About</a>
+                        <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <article class="content-article">
+                    <header class="article-header">
+                        <h1 class="article-title">Why Programmers Should Take Notes</h1>
+                        <div class="article-meta">
+                            <time class="article-date" datetime="2026-03-03">March 3, 2026</time>
+                            <span class="article-reading-time">5 min read</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content">
+                        <p class="lead">Note-taking isn't just for students. As a programmer, your notes become your second brain — a place to store solutions, ideas, and everything you learn.</p>
+
+                        <p>When I started programming, I thought I could remember everything. Syntax, shortcuts, error solutions — it all seemed manageable. But as I learned more, things started slipping through the cracks. How many times have you solved the same error twice? Or forgotten that perfect command you discovered last week?</p>
+
+                        <p>That's when I discovered the power of note-taking. Here's why it matters and how different tools can help.</p>
+
+                        <h2>The Forgetting Curve</h2>
+                        <p>Hermann Ebbinghaus pioneered research on memory in the late 19th century. His <strong>forgetting curve</strong> shows that we forget about 50% of new information within an hour, and up to 70% within 24 hours. Without reinforcement, most new knowledge simply vanishes.</p>
+                        
+                        <p>For programmers, this means:</p>
+                        <ul>
+                            <li>That clever Git command you discovered? Gone in a day.</li>
+                            <li>The solution to that obscure bug? You'll search for it again.</li>
+                            <li>That architecture insight from a tech talk? Lost forever.</li>
+                        </ul>
+
+                        <p>Notes are your defense against the forgetting curve. They capture knowledge so you don't have to rely on memory alone.</p>
+
+                        <h2>Popular Note-Taking Tools for Programmers</h2>
+                        
+                        <h3>📝 Notepad / Simple Text Files</h3>
+                        <p class="link"><a href="https://en.wikipedia.org/wiki/Plain_text" target="_blank">Plain text files</a></p>
+                        <p>The simplest approach. Just plain text files organized in folders. No fuss, no learning curve. Many developers keep a <code>~/notes/</code> directory with Markdown files. It works because it's always there, always fast, and never gets in your way.</p>
+                        
+                        <p><strong>Best for:</strong> Quick notes, temporary scratchpads, minimalists.</p>
+
+                        <h3>⚡ Obsidian</h3>
+                        <p class="link"><a href="https://obsidian.md/" target="_blank">Download Obsidian</a></p>
+                        <p>This is what I personally use. Obsidian builds a <strong>personal knowledge graph</strong> from your Markdown notes. You can link notes together with <code>[[wiki-style links]]</code> and visualize connections. It turns your notes into a web of knowledge, not just a collection of files.</p>
+                        
+                        <p>The graph view shows you how ideas connect. You might start with separate notes on "Rust ownership" and "memory safety" — Obsidian helps you see they're related. Over time, your notes grow into something greater than the sum of their parts.</p>
+                        
+                        <p><strong>Best for:</strong> Building a connected knowledge base, long-term learning, visual thinkers.</p>
+
+                        <h3>🌲 Other Great Tools</h3>
+                        <ul>
+                            <li><strong>Notion</strong> — All-in-one workspace with databases and rich formatting. Great for project documentation and team wikis.</li>
+                            <p class="link"><a href="https://www.notion.so/" target="_blank">Official Notion Site</a></p>
+                            <li><strong>Joplin</strong> — Open-source, encrypted, with markdown support. Good privacy-focused alternative.</li>
+                            <p class="link"><a href="https://joplinapp.org/" target="_blank">Official Joplin Site</a></p>
+                            <li><strong>VSCode with Foam</strong> — If you live in your editor, Foam turns VSCode into a note-taking powerhouse.</li>
+                            <p class="link"><a href="https://foambubble.github.io/foam/" target="_blank">Foam for VSCode</a></p>
+                            <li><strong>Google Docs / OneNote</strong> — If you prefer cloud-based, collaborative tools. This is great for team collaboration and sharing notes too.</li>
+                            <p class="link"><a href="https://www.google.com/docs/about/" target="_blank">Google Docs</a> | <a href="https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app" target="_blank">OneNote</a></p>
+                        </ul>
+
+                        <h2>What to Take Notes On</h2>
+                        <p>Here's what I've found valuable to document:</p>
+
+                        <ul>
+                            <li><strong>Error solutions</strong> — When you fix something tricky, write down the solution. Future you will be grateful.</li>
+                            <li><strong>Commands and shortcuts</strong> — That complex git command you use once a month? Write it down.</li>
+                            <li><strong>Project decisions</strong> — Why you chose one approach over another. Future maintainers (including yourself) will thank you.</li>
+                            <li><strong>Book and article summaries</strong> — Capture key insights before you forget them.</li>
+                            <li><strong>Code snippets</strong> — Patterns you reuse, clever implementations, useful functions.</li>
+                            <li><strong>Learning progress</strong> — What you're studying, what you've learned, what's next.</li>
+                        </ul>
+
+                        <h2>My Obsidian Setup</h2>
+                        <p>I mentioned I use Obsidian, so here's a peek at my workflow:</p>
+
+                        <ul>
+                            <li><strong>Daily notes</strong> — Each day gets a note with what I worked on, learned, or thought about. These become a searchable journal of my work.</li>
+                            <li><strong>Permanent notes</strong> — When a daily note contains something useful, I extract it into a permanent, well-organized note.</li>
+                            <li><strong>MOCs (Maps of Content)</strong> — Notes that act as indexes, linking to other notes on a topic. Like a table of contents for my knowledge.</li>
+                            <li><strong>Tags and links</strong> — I tag notes by language, project, or topic. Links connect related ideas.</li>
+                        </ul>
+
+                        <h2>Getting Started</h2>
+                        <p>You don't need a complex system. Start simple:</p>
+
+                        <ol>
+                            <li>Create a <code>notes</code> folder somewhere</li>
+                            <li>When you learn something useful, write it down in a text file</li>
+                            <li>When you have a few files, try linking them together</li>
+                            <li>Explore tools like Obsidian when you feel limited by plain files</li>
+                        </ol>
+
+                        <blockquote>
+                            <p>The palest ink is better than the best memory.</p>
+                            <cite>— Old Chinese proverb</cite>
+                        </blockquote>
+
+                        <p>Your brain is for having ideas, not storing them. Start taking notes today — your future self will thank you when you need to remember that obscure fix or that brilliant insight you had months ago.</p>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>© 2026 Yrashka's blog</p>
+                    <p><a href="index.html">← Back to Home</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -3,58 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-        }
-        
-        h1 {
-            font-size: 48px;
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            text-align: center;
-            width: 100%;
-        }
-
-        .footer p {
-            margin: 0 0 10px 0;
-            color: #666;
-        }
-
-        .footer a {
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .footer a:hover {
-            color: #333;
-            text-decoration: underline;
-        }
-    </style>
+    <title>Yrashka's blog — thoughts on programming & life</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>COMING SOON</h1>
+    <div class="page">
+        <header class="site-header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="index.html" class="site-title">Yrashka's blog</a>
+                    <nav class="nav">
+                        <a href="index.html" class="active">Home</a>
+                        <a href="about.html">About</a>
+                        <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
-    <footer class="footer">
-        <p>© 2026 Yrashka</p>
-        <a href="https://github.com/Yrashka200" target="_blank">GitHub Profile</a>
-    </footer>
+        <main>
+            <div class="container">
+                <div class="hero">
+                    <p class="hero-text">Writing about programming, system design, and random thoughts.</p>
+                </div>
+
+                <div class="posts-list">
+                    <article class="post-card">
+                        <time class="post-date" datetime="2026-02-24">February 24, 2026</time>
+                        <h2 class="post-title">
+                            <a href="post.html">Introducing my blog</a>
+                        </h2>
+                        <p class="post-excerpt">Welcome to my new digital garden. Here I'll be sharing my journey in programming, thoughts on technology, and occasional random discoveries.</p>
+                        <div class="post-meta">
+                            <span class="reading-time">3 min read</span>
+                        </div>
+                    </article>
+
+
+                    <article class="post-card">
+                        <time class="post-date" datetime="2026-03-03">March 3, 2026</time>
+                        <h2 class="post-title">
+                            <a href="post3.html">Why Programmers Should Take Notes</a>
+                        </h2>
+                        <p class="post-excerpt">Note-taking isn't just for students. As a programmer, your notes become your second brain — a place to store solutions, ideas, and everything you learn.</p>
+                        <div class="post-meta">
+                            <span class="reading-time">5 min read</span>
+                        </div>
+                    </article>
+
+
+
+
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>© 2026 Yrashka's blog</p>
+                    <p><a href="https://pages.github.com/" target="_blank">Hosted on GitHub Pages</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
