@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About — Yrashka's blog</title>
+    <meta name="description" content="Learn more about Yrashka's blog — a personal space for programming, system design, and random thoughts.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,38 +12,71 @@
         <header class="site-header">
             <div class="container">
                 <div class="header-content">
-                    <a href="index.html" class="site-title">Yrashka's blog</a>
-                    <nav class="nav">
+                    <a href="index.html" class="site-title" rel="home">Yrashka's blog</a>
+                    <nav class="nav" aria-label="Main navigation">
                         <a href="index.html">Home</a>
-                        <a href="about.html" class="active">About</a>
-                        <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+                        <a href="about.html" class="active" aria-current="page">About</a>
+                        <a href="https://github.com/Yrashka200" target="_blank" rel="noopener noreferrer">GitHub</a>
                     </nav>
                 </div>
             </div>
         </header>
 
-        <main>
+        <main id="main-content">
             <div class="container">
                 <article class="content-article">
                     <header class="article-header">
                         <h1 class="article-title">About this blog</h1>
+                        <div class="article-meta">
+                        </div>
                     </header>
 
                     <div class="article-content">
-                        <p class="lead">This is my personal blog where I write about programming, system design, and random thoughts. You can read all posts in the <a href="index.html">main feed</a>.</p>
+                        <p class="lead">This is my personal blog where I write about programming, system design, and random thoughts. You can read all posts in the <a href="index.html" class="content-link">main feed</a>.</p>
 
-                        <p>I started this blog to create a space where I can write about programming, system design, and random thoughts without the noise of ads, tracking, or social media algorithms. It's inspired by the small web — simple, personal, and focused on content.</p>
-                        </blockquote>
-                    </div>
-                </article>
-            </div>
-        </main>
+                        <p>I started this blog to create a space where I can write about programming, system design, and random thoughts without the noise of ads, tracking, or social media algorithms. It's inspired by the <strong>small web</strong> — simple, personal, and focused on content.</p>
+                        
+                        <h2>What you'll find here</h2>
+                        <ul class="about-list">
+                            <li><span class="list-icon">💻</span> Programming tutorials and experiences</li>
+                            <li><span class="list-icon">🏗️</span> System design discussions</li>
+                            <li><span class="list-icon">💭</span> Random thoughts and life updates</li>
+                            <li><span class="list-icon">📚</span> And more! <li>
+                        </ul>
+
+                       
+                        <h2>Blog philosophy</h2>
+                        <div class="philosophy-grid">
+                            <div class="philosophy-item">
+                                <h3>📝 Simple</h3>
+                                <p>No ads, no trackers, no popups. Just content.</p>
+                            </div>
+                            <div class="philosophy-item">
+                                <h3>🎯 Focused</h3>
+                                <p>Writing about what matters — programming and life.</p>
+                            </div>
+                            <div class="philosophy-item">
+                                <h3>🌱 Growing</h3>
+                                <p>A digital garden that evolves over time.</p>
+                            </div>
+                            <div class="philosophy-item">
+                                <h3>🤝 Open</h3>
+                                <p>Comments via GitHub — transparent and community-driven.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-email"></div>
+                            <p>If you want to get in touch, have suggestions, or just say hi, feel free to email me at <a href="yrashka2025@atomicmail.io">yrashka2025@atomicmail.io</a>.</p>
+                        </div>
 
         <footer class="site-footer">
             <div class="container">
                 <div class="footer-content">
-                    <p>© 2026 Yrashka's blog</p>
-                    <p><a href="index.html">← Back to Home</a></p>
+                    <p>© 2026 Yrashka's blog. All rights reserved.</p>
+                    <nav aria-label="Footer navigation">
+                        <a href="index.html" class="back-link" rel="prev">← Back to Home</a>
+                        <a href="#main-content" class="back-to-top">↑ Back to Top</a>
+                    </nav>
                 </div>
             </div>
         </footer>
