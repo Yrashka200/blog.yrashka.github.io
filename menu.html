@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    
+    
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    
+    <meta name="theme-color" content="#8b5cf6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
+    
+    
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <title>Yrashka's blog — thoughts on programming & life</title>
+    <meta name="description" content="Personal blog about programming, system design, and random thoughts.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="page">
+
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <a href="menu.html" class="site-title">Yrashka's blog</a>
+            <nav class="nav">
+                <a href="menu.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+
+        <div class="hero">
+            <p class="hero-text">Writing about programming, system design, and random thoughts.</p>
+        </div>
+
+        <div class="tag-filter-section">
+            <h3 class="filter-title">Filter by topic</h3>
+            <div class="tag-filters">
+                <button class="tag-filter active" data-filter="all">All Posts</button>
+                <button class="tag-filter" data-filter="AI">#AI</button>
+                <button class="tag-filter" data-filter="Programming">#Programming</button>
+                <button class="tag-filter" data-filter="Future">#Future</button>
+                <button class="tag-filter" data-filter="IT">#IT</button>
+                <button class="tag-filter" data-filter="PersonalStory">#PersonalStory</button>
+                <button class="tag-filter" data-filter="Journey">#Journey</button>
+                <button class="tag-filter" data-filter="Tools">#Tools</button>
+                <button class="tag-filter" data-filter="Productivity">#Productivity</button>
+                <button class="tag-filter" data-filter="Learning">#Learning</button>
+                <button class="tag-filter" data-filter="Resources">#Resources</button>
+                <button class="tag-filter" data-filter="NewsBlog">#NewsBlog</button>
+                <button class="tag-filter" data-filter="Welcome">#Welcome</button>
+            </div>
+        </div>
+
+        <div class="active-filter-indicator" id="activeFilter">
+            Showing all posts
+        </div>
+
+        <div class="posts-list" id="postsList">
+
+            <!-- NEW POST: Moving to Vercel - March 17, 2026 -->
+            <article class="post-card" data-tags="NewsBlog,Tools,IT">
+                <time class="post-date" datetime="2026-03-17">March 17, 2026</time>
+                <h2 class="post-title"><a href="post6.html">  From GitHub Pages to Vercel</a></h2>
+                <p class="post-excerpt">Why I moved the blog from GitHub Pages to Vercel — faster builds, preview deployments, and better DX.</p>
+                <div class="post-tags">
+                    <span class="tag">#NewsBlog</span>
+                    <span class="tag">#Tools</span>
+                    <span class="tag">#IT</span>
+                </div>
+                <div class="post-meta"><span class="reading-time">4 min read</span></div>
+            </article>
+
+            <article class="post-card" data-tags="AI,Programming,Future">
+                <time class="post-date" datetime="2026-03-07">March 7, 2026</time>
+                <h2 class="post-title"><a href="post5.html">Can AI replace Programmers?</a></h2>
+                <p class="post-excerpt">Exploring the potential of AI in programming and whether it can replace human programmers.</p>
+                <div class="post-tags">
+                    <span class="tag">#AI</span>
+                    <span class="tag">#Programming</span>
+                    <span class="tag">#Future</span>
+                </div>
+                <div class="post-meta"><span class="reading-time">5 min read</span></div>
+            </article>
+
+            <article class="post-card" data-tags="IT,PersonalStory,Journey">
+                <time class="post-date" datetime="2026-03-06">March 6, 2026</time>
+                <h2 class="post-title"><a href="post4.html">How I'm Becoming a Developer</a></h2>
+                <p class="post-excerpt">Sharing my journey in IT and introducing my life story.</p>
+                <div class="post-tags">
+                    <span class="tag">#IT</span>
+                    <span class="tag">#PersonalStory</span>
+                    <span class="tag">#Journey</span>
+                </div>
+                <div class="post-meta"><span class="reading-time">5 min read</span></div>
+            </article>
+
+            <article class="post-card" data-tags="IT,Tools,Productivity,Resources">
+                <time class="post-date" datetime="2026-03-03">March 3, 2026</time>
+                <h2 class="post-title"><a href="post2.html">Good apps and websites for programmers</a></h2>
+                <p class="post-excerpt">A list of tools that I find useful for programming and learning.</p>
+                <div class="post-tags">
+                    <span class="tag">#IT</span>
+                    <span class="tag">#Tools</span>
+                    <span class="tag">#Productivity</span>
+                    <span class="tag">#Resources</span>
+                </div>
+                <div class="post-meta"><span class="reading-time">6 min read</span></div>
+            </article>
+
+            <article class="post-card" data-tags="IT,Productivity,Learning">
+                <time class="post-date" datetime="2026-03-03">March 3, 2026</time>
+                <h2 class="post-title"><a href="post3.html">Why Programmers Should Take Notes</a></h2>
+                <p class="post-excerpt">Notes become your second brain as a programmer.</p>
+                <div class="post-tags">
+                    <span class="tag">#IT</span>
+                    <span class="tag">#Productivity</span>
+                    <span class="tag">#Learning</span>
+                </div>
+                <div class="post-meta"><span class="reading-time">5 min read</span></div>
+            </article>
+
+            <article class="post-card" data-tags="NewsBlog,IT,Welcome">
+                <time class="post-date" datetime="2026-02-24">February 24, 2026</time>
+                <h2 class="post-title"><a href="post.html">Introducing my blog</a></h2>
+                <p class="post-excerpt">Welcome to my new digital garden.</p>
+                <div class="post-tags">
+                    <span class="tag">#NewsBlog</span>
+                    <span class="tag">#IT</span>
+                    <span class="tag">#Welcome</span>
+                </div>
+                <div class="post-meta"><span class="reading-time">3 min read</span></div>
+            </article>
+
+        </div>
+
+        <div class="no-posts-message" id="noPostsMessage" style="display:none;">
+            <p>No posts found with this tag. <button class="reset-filter-btn">Show all posts</button></p>
+        </div>
+
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <p>© 2026 Yrashka's blog</p>
+            <p><a href="https://vercel.com" target="_blank">Powered by Vercel</a></p>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".tag-filter");
+    const posts = document.querySelectorAll(".post-card");
+    const indicator = document.getElementById("activeFilter");
+    const noPostsMessage = document.getElementById("noPostsMessage");
+
+    function filterPosts(tag) {
+        let visibleCount = 0;
+
+        posts.forEach(post => {
+            const tags = post.dataset.tags.split(",");
+
+            if (tag === "all" || tags.includes(tag)) {
+                post.style.display = "block";
+                visibleCount++;
+            } else {
+                post.style.display = "none";
+            }
+        });
+
+        if (tag === "all") {
+            indicator.textContent = "Showing all posts";
+        } else {
+            indicator.textContent = "Showing posts tagged #" + tag;
+        }
+
+        noPostsMessage.style.display = visibleCount === 0 ? "block" : "none";
+
+        filterButtons.forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.filter === tag);
+        });
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            filterPosts(button.dataset.filter);
+        });
+    });
+
+    const reset = document.querySelector(".reset-filter-btn");
+    if (reset) {
+        reset.addEventListener("click", () => filterPosts("all"));
+    }
+
+    filterPosts("all");
+});
+</script>
+
+</body>
+</html>

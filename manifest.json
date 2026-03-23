@@ -1,0 +1,23 @@
+{
+  "name": "Yrashka's blog",
+  "short_name": "YrashkaBlog",
+  "description": "Personal blog about programming and life",
+  "start_url": "/menu.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

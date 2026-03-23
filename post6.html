@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moving to Vercel – Yrashka's blog</title>
+  <meta name="description" content="Why I left GitHub Pages and moved the blog to Vercel — faster builds, better DX, and preview deployments.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <a href="menu.html" class="site-title">Yrashka's blog</a>
+        <nav class="nav">
+          <a href="menu.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- article header -->
+      <article class="post-full">
+        <header class="article-header">
+          <time class="post-date" datetime="2026-03-17">March 17, 2026</time>
+          <h1 class="article-title">✨ From GitHub Pages to Vercel</h1>
+          <div class="article-meta">
+            <span class="reading-time">4 min read</span>
+            <span class="tag-list">
+              <span class="tag">#NewsBlog</span>
+              <span class="tag">#Tools</span>
+              <span class="tag">#IT</span>
+            </span>
+          </div>
+        </header>
+
+        <!-- content -->
+        <div class="article-content">
+
+          <p class="lead">
+            If you’re reading this, you’re already on the new version of my blog.  
+            This week I finally moved the site from <strong>GitHub Pages</strong> to <strong>Vercel</strong>.  
+            Same content, same URLs — but now with a much smoother workflow.
+          </p>
+
+          <h2>Why leave GitHub Pages?</h2>
+          <p>
+            GitHub Pages is great for static hosting — it’s free, reliable, and deeply integrated with your repos.  
+            But after a year of using it, I started hitting a few limitations:
+          </p>
+          <ul>
+            <li><strong>Builds are locked to Jekyll</strong> – yes, you can use custom actions, but it’s not as seamless as a platform built for modern frontend.</li>
+            <li><strong>No built‑in preview deployments</strong> – every change goes straight to production unless you set up complex workflows.</li>
+            <li><strong>SSL certificates work, but they’re not automatic for custom domains</strong> (I had to renew mine manually last month – annoying).</li>
+            <li><strong>No serverless functions</strong> – I don’t need them now, but maybe later I’ll want a tiny API or a contact form.</li>
+          </ul>
+          <p>
+            So I started looking for alternatives, and Vercel kept coming up in every conversation.
+          </p>
+
+          <h2>Why Vercel won</h2>
+          <p>
+            Vercel is essentially “GitHub Pages on steroids”. Here’s what sold me:
+          </p>
+          <ul>
+            <li><strong>Instant Git integration</strong> – connected my repo, and it auto‑detected the static files. One click and the site was live.</li>
+            <li><strong>Preview for every PR</strong> – now when I write a draft post, I get a unique URL to share before merging. Huge for proofreading.</li>
+            <li><strong>Automatic SSL + CDN</strong> – certificates are managed for you, and the edge network is fast everywhere.</li>
+            <li><strong>Analytics (optional)</strong> – privacy‑friendly, no cookie banner needed.</li>
+            <li><strong>It’s free for personal projects</strong> – exactly like GitHub Pages, but with more features.</li>
+          </ul>
+
+          <blockquote>
+            <p>The migration took less than 15 minutes — and that includes setting up my custom domain again.</p>
+          </blockquote>
+
+          <h2>What about the domain?</h2>
+          <p>
+            I kept the same <code>yrashka.dev</code> (or <code>.github.io</code> redirect? you can adjust this line).  
+            Vercel makes it trivial to add a custom domain, and the DNS change propagated in about 10 minutes.  
+            No downtime, no broken links.
+          </p>
+
+          <h2>Is there any downside?</h2>
+          <p>
+            Honestly, not really. If you’re hosting a simple static site, both platforms are excellent.  
+            GitHub Pages is simpler (just push and it’s live), but Vercel gives you so much more flexibility for <em>almost</em> zero extra complexity.
+          </p>
+          <p>
+            The only “downside” I can think of: you lose the <code>.github.io</code> subdomain branding, but that’s a small price for preview deployments and serverless readiness.
+          </p>
+
+          <h2>What’s next?</h2>
+          <p>
+            Now that the infrastructure is more modern, I plan to:
+          </p>
+          <ul>
+            <li>Add a tiny “like” button using a Vercel Edge Function</li>
+            <li>Experiment with <strong>MDX</strong> (embedding interactive components in posts)</li>
+            <li>Keep writing, obviously 😄</li>
+          </ul>
+          <p>
+            If you’re on the fence about switching, I’d say go for it — you can always move back.  
+            But I doubt you’ll want to.
+          </p>
+
+          <hr>
+      </article>
+
+    </div> <!-- end container -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2026 Yrashka's blog</p>
+        <p><a href="https://vercel.com" target="_blank">Powered by Vercel</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div> <!-- end page -->
+</body>
+</html>
