@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Are Programming Books Still Relevant in 2026?</title>
+  <meta name="description" content="Exploring whether programming books still matter in the age of AI, tutorials, and fast-moving tech.">
+  <style>
+    /* Simple & clean styles */
+    :root {
+      --bg-primary: #0a0c12;
+      --bg-secondary: #0f1119;
+      --text-primary: #e4e4e7;
+      --text-secondary: #94a3b8;
+      --accent: #60a5fa;
+      --border: #252836;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, monospace;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .site-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .site-title:hover {
+      text-decoration: underline;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Article */
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .post-date {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0c12;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .reading-time {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--bg-secondary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    /* Content */
+    .post-full {
+      padding-bottom: 3rem;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* Simple box for tips */
+    .tip-box {
+      background: var(--bg-secondary);
+      border-left: 3px solid var(--accent);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+    }
+
+    .tip-box strong {
+      color: var(--accent);
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-section a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .article-title {
+        font-size: 1.5rem;
+      }
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header class="site-header">
+    <div class="header-content">
+      <a href="menu.html" class="site-title">Yrashka's blog</a>
+      <nav class="nav">
+        <a href="menu.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="photos.html">📸 Photos</a>
+        <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="post-full">
+      <header class="article-header">
+        <time class="post-date" datetime="2026-04-15">April 15, 2026</time>
+        <span class="feature-badge"> OPINION</span>
+        <h1 class="article-title">Are Programming Books Still Relevant in 2026?</h1>
+        <div class="article-meta">
+          <span class="reading-time">4 min read</span>
+          <div class="tag-list">
+            <span class="tag">#Programming</span>
+            <span class="tag">#Books</span>
+            <span class="tag">#Learning</span>
+            <span class="tag">#Opinion</span>
+          </div>
+        </div>
+      </header>
+
+      <p class="lead">
+        <strong>Short answer: yes, but differently.</strong> In a world of AI assistants and YouTube tutorials, programming books haven't died — they've evolved.
+      </p>
+
+      <h2>The Old vs. The New</h2>
+      <p>
+        Back in 2010, if you wanted to learn programming, you bought a book. That was it. Today? You have infinite tutorials, ChatGPT, video courses, and interactive platforms. So why would anyone still read a programming book in 2026?
+      </p>
+
+      <p>
+        Because books offer something most short-form content can't: <strong>depth and structure</strong>. A 10-minute YouTube video shows you how to fix a bug. A book explains why the bug happened in the first place.
+      </p>
+
+      <div class="tip-box">
+        <strong> The truth:</strong> Books teach you fundamentals. Tutorials teach you tricks. You need both.
+      </div>
+
+      <h2>What Books Are Still Good For</h2>
+      <p>
+        <strong>1. Fundamentals never expire.</strong> Algorithms, data structures, design patterns — these don't change much. "Clean Code" from 2008 is still mostly relevant. "The Pragmatic Programmer" from 1999? Still gold.
+      </p>
+      <p>
+        <strong>2. Deep dives.</strong> Want to understand how databases actually work? How compilers parse your code? Books are still the best format for that.
+      </p>
+      <p>
+        <strong>3. Focus without distractions.</strong> No notifications, no autoplay, no "subscribe and like." Just you and the knowledge.
+      </p>
+
+      <h2>What Books Are Bad For</h2>
+      <p>
+        <strong>1. Fast-changing tech.</strong> A book about React from 2023 is already outdated. A book about AI from 2024 misses half of what happened this year.
+      </p>
+      <p>
+        <strong>2. Quick answers.</strong> Need to fix a specific error? Google or ChatGPT will solve it in 30 seconds. A book won't.
+      </p>
+
+      <h2>The Verdict</h2>
+      <p>
+        Programming books in 2026 are <strong>not dead</strong>. They're just not the main source anymore. They're the foundation. The thing you read when you want to truly understand something, not just copy-paste a solution.
+      </p>
+      <p>
+        If you're a beginner, grab a classic like "Automate the Boring Stuff" or "JavaScript: The Good Parts." Read it slowly. Do the exercises. Then supplement with YouTube and AI tools. That combo will take you further than any single method alone.
+      </p>
+
+      <hr>
+
+      <p style="font-style: italic; color: var(--text-secondary);">
+        What do you think? Still reading programming books? Or have you switched entirely to video and AI? Let me know on GitHub!
+      </p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>✦ Yrashka's Blog</h4>
+                    <p>© 2026 Yrashka's Blog</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="menu.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="photos.html">Photos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/Yrashka200" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="#" id="contactLink">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Powered by</h4>
+                    <p><a href="https://vercel.com" target="_blank" rel="noopener">▲ Vercel</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

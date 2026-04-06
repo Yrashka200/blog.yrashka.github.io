@@ -38,7 +38,6 @@
                         <p><strong>Disclaimer:</strong> This list is based on my personal experience and preferences. There are many great tools out there, and the best choice depends on your specific needs and workflow.</p>
                     </div>
 
-
                     <div class="article-content" itemprop="articleBody">
                         <p class="lead">As a programmer, having the right tools can make a huge difference in your productivity and learning. Here are some of my favorite apps and websites that I use regularly.</p>
 
@@ -105,6 +104,32 @@
                         <h2>Conclusion</h2>
                         <p>Having the right tools can significantly enhance your programming experience. Whether it's a powerful editor, a reliable browser, or a helpful learning platform, the right tools make all the difference in your productivity and learning journey.</p>
 
+                        <!-- Modern Like/Dislike section -->
+                        <div class="vote-section" id="vote-container" data-post-id="post2">
+                            <div class="vote-buttons">
+                                <button class="vote-btn like" id="like-btn">
+                                    <span class="emoji">👍</span>
+                                    <span class="vote-count" id="like-count">0</span>
+                                </button>
+                                
+                                <button class="vote-btn dislike" id="dislike-btn">
+                                    <span class="emoji">👎</span>
+                                    <span class="vote-count" id="dislike-count">0</span>
+                                </button>
+                                
+                                <div class="vote-divider"></div>
+                                
+                                <div class="vote-total">
+                                    <span>total</span>
+                                    <strong id="total-votes">0</strong>
+                                    <span>votes</span>
+                                </div>
+                            </div>
+                            <div class="vote-status" id="vote-status">
+                                <span>✨ What do you think about this post?</span>
+                            </div>
+                        </div>
+
                         <!-- Comments section using utterances -->
                         <div class="comments-container">
                             <h3>Comments</h3>
@@ -130,6 +155,243 @@
                 </article>
             </div>
         </main>
+
+        
+        <script>
+        // Modern Like/Dislike functionality
+        class VoteManager {
+            constructor(postId) {
+                this.postId = postId;
+                this.likes = 0;
+                this.dislikes = 0;
+                this.userVote = null;
+                this.init();
+            }
+            
+            async init() {
+                await this.fetchVotes();
+                this.renderButtons();
+            }
+            
+            async fetchVotes() {
+                try {
+                    const response = await fetch(`/api/likes?postId=${this.postId}`);
+                    const data = await response.json();
+                    this.likes = data.likes || 0;
+                    this.dislikes = data.dislikes || 0;
+                    this.userVote = data.userVote || null;
+                } catch (error) {
+                    console.error('Error fetching votes:', error);
+                    this.loadFromLocalStorage();
+                }
+            }
+            
+            loadFromLocalStorage() {
+                const key = `post_${this.postId}_votes`;
+                const saved = localStorage.getItem(key);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    this.likes = data.likes || 0;
+                    this.dislikes = data.dislikes || 0;
+                    this.userVote = data.userVote || null;
+                }
+            }
+            
+            saveToLocalStorage() {
+                const key = `post_${this.postId}_votes`;
+                localStorage.setItem(key, JSON.stringify({
+                    likes: this.likes,
+                    dislikes: this.dislikes,
+                    userVote: this.userVote
+                }));
+            }
+            
+            async vote(voteType) {
+                try {
+                    const response = await fetch(`/api/likes?postId=${this.postId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ voteType })
+                    });
+                    
+                    const data = await response.json();
+                    this.likes = data.likes;
+                    this.dislikes = data.dislikes;
+                    this.userVote = data.userVote;
+                } catch (error) {
+                    console.error('Error voting, using localStorage fallback:', error);
+                    
+                    if (this.userVote === voteType) {
+                        // Remove vote
+                        if (voteType === 'like') this.likes--;
+                        else this.dislikes--;
+                        this.userVote = null;
+                    } else if (this.userVote && this.userVote !== voteType) {
+                        // Change vote
+                        if (voteType === 'like') {
+                            this.likes++;
+                            this.dislikes--;
+                        } else {
+                            this.dislikes++;
+                            this.likes--;
+                        }
+                        this.userVote = voteType;
+                    } else {
+                        // New vote
+                        if (voteType === 'like') this.likes++;
+                        else this.dislikes++;
+                        this.userVote = voteType;
+                    }
+                    
+                    this.saveToLocalStorage();
+                }
+                
+                this.renderButtons();
+            }
+            
+            renderButtons() {
+                const likeBtn = document.getElementById('like-btn');
+                const dislikeBtn = document.getElementById('dislike-btn');
+                const likeCount = document.getElementById('like-count');
+                const dislikeCount = document.getElementById('dislike-count');
+                const totalSpan = document.getElementById('total-votes');
+                const voteStatus = document.getElementById('vote-status');
+                
+                // Update like button active state
+                if (likeBtn) {
+                    if (this.userVote === 'like') {
+                        likeBtn.classList.add('active');
+                    } else {
+                        likeBtn.classList.remove('active');
+                    }
+                }
+                
+                // Update dislike button active state
+                if (dislikeBtn) {
+                    if (this.userVote === 'dislike') {
+                        dislikeBtn.classList.add('active');
+                    } else {
+                        dislikeBtn.classList.remove('active');
+                    }
+                }
+                
+                // Update like count
+                if (likeCount) {
+                    likeCount.textContent = this.likes;
+                }
+                
+                // Update dislike count
+                if (dislikeCount) {
+                    dislikeCount.textContent = this.dislikes;
+                }
+                
+                // Update total votes
+                if (totalSpan) {
+                    totalSpan.textContent = this.likes + this.dislikes;
+                }
+                
+                // Update status message
+                if (voteStatus) {
+                    if (this.userVote === 'like') {
+                        voteStatus.innerHTML = '💜 Thanks for your support! You liked this post.';
+                    } else if (this.userVote === 'dislike') {
+                        voteStatus.innerHTML = '📝 Thanks for your feedback! You disliked this post.';
+                    } else {
+                        const messages = [
+                            '✨ What do you think about this post?',
+                            '💭 Share your opinion!',
+                            '👍👎 Like or dislike?',
+                            '📢 Your feedback matters!',
+                            '💡 Did you find this helpful?',
+                            '🌟 Your vote helps others!',
+                            '🤔 What are your thoughts?',
+                            '💬 Let me know what you think!'
+                        ];
+                        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+                        voteStatus.innerHTML = randomMsg;
+                    }
+                }
+                
+                // Animate count changes
+                this.animateCounts();
+            }
+            
+            animateCounts() {
+                const likeCount = document.getElementById('like-count');
+                const dislikeCount = document.getElementById('dislike-count');
+                
+                if (likeCount) {
+                    likeCount.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        if (likeCount) likeCount.style.transform = '';
+                    }, 200);
+                }
+                
+                if (dislikeCount) {
+                    dislikeCount.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        if (dislikeCount) dislikeCount.style.transform = '';
+                    }, 200);
+                }
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const voteContainer = document.getElementById('vote-container');
+            if (voteContainer) {
+                const postId = voteContainer.dataset.postId;
+                const voteManager = new VoteManager(postId);
+                
+                // Make functions available globally
+                window.voteLike = () => voteManager.vote('like');
+                window.voteDislike = () => voteManager.vote('dislike');
+                
+                // Add click event listeners to buttons
+                const likeBtn = document.getElementById('like-btn');
+                const dislikeBtn = document.getElementById('dislike-btn');
+                
+                if (likeBtn) {
+                    likeBtn.addEventListener('click', () => voteManager.vote('like'));
+                }
+                if (dislikeBtn) {
+                    dislikeBtn.addEventListener('click', () => voteManager.vote('dislike'));
+                }
+            }
+        });
+
+        // Optional: Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger if typing in input or textarea
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            // Press 'l' for like, 'd' for dislike
+            if (e.key === 'l' || e.key === 'L') {
+                e.preventDefault();
+                const likeBtn = document.getElementById('like-btn');
+                if (likeBtn) likeBtn.click();
+            } else if (e.key === 'd' || e.key === 'D') {
+                e.preventDefault();
+                const dislikeBtn = document.getElementById('dislike-btn');
+                if (dislikeBtn) dislikeBtn.click();
+            }
+        });
+
+        // Add tooltips to show keyboard shortcuts
+        setTimeout(() => {
+            const likeBtn = document.getElementById('like-btn');
+            const dislikeBtn = document.getElementById('dislike-btn');
+            
+            if (likeBtn && !likeBtn.hasAttribute('title')) {
+                likeBtn.setAttribute('title', 'Like (press L)');
+            }
+            if (dislikeBtn && !dislikeBtn.hasAttribute('title')) {
+                dislikeBtn.setAttribute('title', 'Dislike (press D)');
+            }
+        }, 1000);
+        </script>
 
         <footer class="site-footer">
             <div class="container">

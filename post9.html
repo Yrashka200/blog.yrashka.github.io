@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Patch v2.9.1 Beta: Explore the latest changes, bug fixes, and new features in our blog platform update.">
+    <meta name="author" content="Yrashka">
+    
+    <!-- Theme colors -->
+    <meta name="theme-color" content="#0a0c12" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f0f4f8" media="(prefers-color-scheme: light)">
+    
+    <title>Patch v2.9.1 Beta: Changes and Updates — Yrashka's Blog</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c12;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            color: #e4e4e7;
+            line-height: 1.7;
+        }
+
+        /* smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ===== HEADER ===== */
+        .site-header {
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .site-title:hover {
+            opacity: 0.85;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #60a5fa;
+        }
+
+        .nav a.active {
+            color: #60a5fa;
+        }
+
+        .nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #60a5fa;
+            border-radius: 2px;
+        }
+
+        /* ===== ARTICLE ===== */
+        .content-article {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #f0f9ff, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            color: #6c7086;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .post-date::before {
+            content: '📅 ';
+        }
+
+        .reading-time::before {
+            content: '⏱️ ';
+        }
+
+        /* article content */
+        .article-content {
+            font-size: 1.05rem;
+            color: #cbd5e6;
+        }
+
+        .article-content p {
+            margin-bottom: 1.25rem;
+        }
+
+        .article-content p:first-of-type::first-letter {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #60a5fa;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .site-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(96, 165, 250, 0.15);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #60a5fa;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            font-size: 0.8rem;
+            color: #6c7086;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-section a {
+            color: #6c7086;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #60a5fa;
+        }
+
+        /* ===== BACK TO TOP BUTTON ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e1f2e;
+            border: 1px solid #60a5fa;
+            color: #60a5fa;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #60a5fa;
+            color: #0a0c12;
+            transform: translateY(-3px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 680px) {
+            .page {
+                padding: 1.2rem;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.2rem;
+            }
+            
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        /* print styles */
+        @media print {
+            .site-header, .site-footer, .back-to-top, .nav {
+                display: none;
+            }
+            .article-content {
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <div class="header-content">
+                <a href="menu.html" class="site-title">✦ Yrashka's Blog ✦</a>
+                <nav class="nav" aria-label="Main navigation">
+                    <a href="menu.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="photos.html">📸 Photos</a>
+                    <a href="https://github.com/Yrashka200" target="_blank" rel="noopener">GitHub</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <article class="content-article" itemscope itemtype="http://schema.org/Article">
+                <header class="article-header">
+                    <h1 class="article-title" itemprop="headline">Patch v2.9.1 Beta: Changes and Updates</h1>
+                    <div class="article-meta">
+                        <time class="post-date" datetime="2026-04-15" itemprop="datePublished">April 15, 2026</time>
+                        <span class="reading-time">4 min read</span>
+                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                            <meta itemprop="name" content="Yrashka">
+                        </span>
+                    </div>
+                </header>
+
+                <div class="article-content" itemprop="articleBody">
+                    <p>As we continue to evolve our blog platform, we've implemented several key updates in our latest patch. Here's a comprehensive overview of the changes and improvements.</p>
+
+                    <h2>Patch v2.9.1 Beta: Key Changes</h2>
+                    <p>This beta patch includes bug fixes and minor improvements to enhance stability and user experience. Please note that some features are in beta and may work unstably. We are actively working on refining them.</p>
+
+                    <h3>Bug Fixes</h3>
+                    <ul>
+                        <li>Resolved issues with photo gallery loading on mobile devices</li>
+                        <li>Fixed tag filtering glitches</li>
+                        <li>Corrected minor CSS rendering problems in dark mode</li>
+                    </ul>
+
+                    <h3>Performance Tweaks</h3>
+                    <ul>
+                        <li>Optimized image loading times</li>
+                        <li>Reduced JavaScript bundle size for faster page loads</li>
+                    </ul>
+
+                    <h3>UI Enhancements</h3>
+                    <ul>
+                        <li>Improved hover effects on gallery items</li>
+                        <li>Better accessibility for screen readers</li>
+                        <li>Refined button styles</li>
+                    </ul>
+
+                    <h3>Stability Improvements</h3>
+                    <ul>
+                        <li>Enhanced error handling for modal interactions</li>
+                        <li>Fixed potential crashes on older browsers</li>
+                    </ul>
+
+                    <h3>New Gallery Features</h3>
+                    <p>With this patch, we've introduced exciting new features to the photo gallery! Enjoy enhanced zoom capabilities, better image quality, and smoother navigation.</p>
+
+                    <h3>Delayed Like/Dislike Update</h3>
+                    <p>The update featuring like and dislike functions is slightly delayed, but it's coming very soon! We plan to release it in the near future.</p>
+
+                    <p><strong>Warning:</strong> Since this is a beta version, some features may work unstably. We recommend testing the update in a safe environment before full deployment.</p>
+
+                    <p>Feedback is crucial for this beta release. If you encounter any issues or have suggestions, please report them on <a href="https://github.com/Yrashka200" target="_blank" rel="noopener">GitHub</a>!</p>
+                </div>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>✦ Yrashka's Blog</h4>
+                    <p>© 2026 Yrashka's Blog</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="menu.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="photos.html">Photos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/Yrashka200" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="#" id="contactLink">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Powered by</h4>
+                    <p><a href="https://vercel.com" target="_blank" rel="noopener">▲ Vercel</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#8b5cf6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
+    <title>Photos — Yrashka's gallery</title>
+    <meta name="description" content="Photo gallery — workspace, coding moments, and random shots from my journey.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery-header {
+            margin: 2rem 0 1rem;
+        }
+        
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0 5rem;
+        }
+        
+        .photo-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+        
+        .photo-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card:hover .photo-img {
+            transform: scale(1.03);
+        }
+        
+        .photo-info {
+            padding: 1.25rem;
+        }
+        
+        .photo-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .photo-caption {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .photo-date {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.6);
+            border-radius: 12px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: monospace;
+            z-index: 1001;
+        }
+        
+        @media (max-width: 640px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .gallery-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <a href="menu.html" class="site-title">Yrashka's blog</a>
+            <nav class="nav">
+                <a href="menu.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="photos.html" class="active">📸 Photos</a>
+                <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        
+        <div class="gallery-header">
+            <h1>📸 Photo Gallery</h1>
+            <p>Random shots from my coding journey, workspace setups, and things that inspire me.</p>
+        </div>
+        
+        <div class="photo-grid" id="photoGrid">
+            <!-- Photos will be loaded here -->
+        </div>
+        
+    </div>
+</main>
+
+<footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>✦ Yrashka's Blog</h4>
+                    <p>© 2026 Yrashka's Blog</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="menu.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="photos.html">Photos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/Yrashka200" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="#" id="contactLink">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Powered by</h4>
+                    <p><a href="https://vercel.com" target="_blank" rel="noopener">▲ Vercel</a></p>
+                </div>
+            </div>
+        </footer>
+
+</div>
+
+<!-- Modal -->
+<div id="photoModal" class="modal" onclick="closeModal()">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-img" src="" alt="">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+</div>
+
+<script>
+    
+    const photos = [
+        {
+            src: "Photos/Girl.jpg",
+            title: "My dream girl ❤️",
+            caption: "You are no longer alive, but you are forever in my heart ❤️😔. Now it's also my mascot",
+            date: "March 2026"
+        },
+        {
+            src: "Photos/Anime.jpg",
+            title: "My favorite Anime №1",
+            caption: "I love this Anime ❤️",
+            date: "March 2026"
+        }
+    ];
+    
+    function renderGallery() {
+        const grid = document.getElementById('photoGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = photos.map((photo, index) => `
+            <div class="photo-card" onclick="openModal(${index})">
+                <img class="photo-img" src="${photo.src}" alt="${photo.title}" loading="lazy">
+                <div class="photo-info">
+                    <h3 class="photo-title">${photo.title}</h3>
+                    <p class="photo-caption">${photo.caption}</p>
+                    <span class="photo-date">📅 ${photo.date}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function openModal(index) {
+        const photo = photos[index];
+        const modal = document.getElementById('photoModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        
+        modalImg.src = photo.src;
+        modalImg.alt = photo.title;
+        modalCaption.innerHTML = `<strong>${photo.title}</strong> — ${photo.caption} (${photo.date})`;
+        modal.classList.add('active');
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('photoModal');
+        modal.classList.remove('active');
+    }
+    
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+    
+    // Render on load
+    renderGallery();
+</script>
+
+</body>
+</html>

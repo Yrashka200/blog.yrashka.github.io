@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0c12" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+    <title>Community Projects — Yrashka's blog</title>
+    <meta name="description" content="Showcase of community projects. Add your own project via Formspree.">
+    <style>
+        /* ===== BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-base: #0a0c12;
+            --bg-surface: #0f1119;
+            --bg-card: #11131d;
+            --text-primary: #e4e4e7;
+            --text-secondary: #94a3b8;
+            --text-muted: #6c7086;
+            --accent: #60a5fa;
+            --accent-hover: #3b82f6;
+            --border: #252836;
+            --border-soft: #1e1f2c;
+            --success: #4ade80;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Light mode */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-base: #f8fafc;
+                --bg-surface: #ffffff;
+                --bg-card: #f1f5f9;
+                --text-primary: #0f172a;
+                --text-secondary: #334155;
+                --text-muted: #64748b;
+                --border: #cbd5e1;
+                --border-soft: #e2e8f0;
+            }
+        }
+
+        body {
+            background: var(--bg-base);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER ===== */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        /* ===== PROJECT GRID ===== */
+        .section-title {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-meta {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-soft);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .form-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* ===== FOOTER ===== */
+        .site-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .site-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .form-section {
+                padding: 1.5rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <a href="menu.html" class="site-title"> Yrashka's blog </a>
+        <nav class="nav">
+            <a href="menu.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="photos.html">Photos</a>
+            <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="section-title"> Community Projects</h1>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            A showcase of projects made by readers and friends. Want to add yours? Fill out the form below.
+        </p>
+
+        <h2 style="font-size: 1.2rem; margin-bottom: 1rem;">Featured Projects</h2>
+        <div class="projects-grid"> 
+            <div class="project-card">
+                <h3 class="project-title"> Nothing to see yet </h3>
+                <p class="project-description"> No projects yet. Be the first to submit! </p>
+            </div>
+        </div>
+
+
+        <div class="form-section">
+            <h2 class="form-title"> Add your project</h2>
+            <p class="form-subtitle">Fill out the form below. Your project will appear here after review.</p>
+
+
+            <form action="https://formspree.io/f/xeernqjz" method="POST" id="projectForm">
+          
+                <div class="form-group">
+                    <label for="projectName"> Project name *</label>
+                    <input type="text" id="projectName" name="project_name" required placeholder="e.g., WebTiles Explorer">
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="description"> Description *</label>
+                    <textarea id="description" name="description" rows="3" required placeholder="Short description of your project..."></textarea>
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="url"> Project link *</label>
+                    <input type="url" id="url" name="project_url" required placeholder="https://github.com/your/project">
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="author"> Your name / nickname</label>
+                    <input type="text" id="author" name="author" placeholder="e.g., yrashka">
+                </div>
+
+               
+                <input type="text" name="_gotcha" style="display:none">
+
+             
+                <button type="submit"> Submit project</button>
+                <p class="form-note">Projects are manually reviewed before appearing. Pls use this for your personal website projects, like portfolios or blog3 I don't accept spam, Github repost, etc </p>
+            </form>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p> 2026 Yrashka's blog</p>
+</div>
+
+<script>
+    const form = document.getElementById('projectForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            
+            const btn = form.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ Sending...';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 3000);
+        });
+    }
+</script>
+</body>
+</html>
