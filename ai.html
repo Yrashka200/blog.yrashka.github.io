@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#8b5cf6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
+    <title>Blog Assistant Kate · Yrashka's blog</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        :root {
+            --bg-base: #0a0a0f;
+            --bg-surface: #0d0d14;
+            --bg-soft: #14141f;
+            --bg-elevated: #1c1c2a;
+            --text-primary: #e4e4e7;
+            --text-secondary: #c084fc;
+            --text-muted: #a855f7;
+            --accent: #d946ef;
+            --accent-secondary: #c026d3;
+            --accent-gradient: linear-gradient(135deg, #d946ef, #ec4899, #a21caf);
+            --accent-soft: #2d0d3a;
+            --border: #4a1d6d;
+            --border-soft: #2d1b3d;
+            --card-bg: #0f0f18;
+            --code-bg: #0a0a10;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --error: #f87171;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 8px rgba(168, 85, 247, 0.2);
+            --shadow-lg: 0 10px 20px rgba(217, 70, 239, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #0a0a0f 0%, #0d0d14 50%, #14141f 100%);
+            min-height: 100vh;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .site-header {
+            padding: 1.25rem 0;
+            background: rgba(13, 13, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .site-title {
+            font-size: 1.35rem;
+            font-weight: 650;
+            background: linear-gradient(135deg, #d946ef, #ec4899, #a21caf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: #ec4899;
+        }
+
+        .ai-chat-section {
+            margin: 2rem 0;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .status {
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .context-buttons {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .context-buttons button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .context-buttons button:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: var(--bg-base);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 16px;
+            max-width: 80%;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .message.user {
+            background: var(--accent-gradient);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.bot {
+            background-color: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .typing {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            outline: none;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .chat-input input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .chat-input button {
+            margin-left: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input button:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .site-footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        ::selection {
+            background: #d946ef;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <a href="menu.html" class="site-title">Yrashka's blog</a>
+            <nav class="nav">
+                <a href="menu.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="ai.html">AI Chat</a>
+                <a href="https://github.com/Yrashka200" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <section class="ai-chat-section">
+            <h1 style="text-align: center; margin-bottom: 2rem; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">💬 Kate · Blog Assistant </h1>
+            <div class="chat-container">
+                <div class="chat-header">
+                    🤖 Kate · Yrashka's Assistant
+                    <div class="status" id="status">🟢 Online</div>
+                </div>
+                <div class="context-buttons">
+                    <button onclick="askQuestion('What is this blog about?')"> About blog</button>
+                    <button onclick="askQuestion('Who is Yrashka?')"> Who is Yrashka?</button>
+                    <button onclick="askQuestion('Tell me about the AI vs programmers post')"> 🤖 AI post</button>
+                    <button onclick="askQuestion('What happened with Vercel migration?')"> ⚡ Vercel post</button>
+                    <button onclick="askQuestion('Which OS does Yrashka recommend?')"> 🐧 OS post</button>
+                    <button onclick="askQuestion('Just chat with me')"> 💬 Casual chat</button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot">Hi! I'm Kate. I know Yrashka's blog inside out. Ask me to **summarize any post** (AI, Vercel, OS comparison) or just talk to me. The more we chat, the glitchier I get 😵</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Ask Kate about blog posts or anything..." onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 Yrashka's blog </p>
+    </div>
+</footer>
+</div>
+
+<script>
+   let _0xae3gee;const blogKnowledge={"what is this blog about":"Yrashka's blog is a personal tech blog where Yrashka shares journeys as a developer, writes about programming, AI, system design, and random thoughts. It's a space for learning and community! 🚀","who is yrashka":"\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0020\u0069\u0073\u0020\u0061\u0020\u006A\u0075\u006E\u0069\u006F\u0072\u0020\u0050\u0079\u0074\u0068\u006F\u006E\u0020\u0064\u0065\u0076\u0065\u006C\u006F\u0070\u0065\u0072\u0020\u0061\u006E\u0064\u0020\u006F\u0070\u0065\u006E\u2011\u0073\u006F\u0075\u0072\u0063\u0065\u0020\u0065\u006E\u0074\u0068\u0075\u0073\u0069\u0061\u0073\u0074\u0020\u0077\u0068\u006F\u0020\u0062\u0075\u0069\u006C\u0064\u0073\u0020\u0061\u0075\u0074\u006F\u006D\u0061\u0074\u0069\u006F\u006E\u0020\u0074\u006F\u006F\u006C\u0073\u002C\u0020\u0065\u0078\u0070\u0065\u0072\u0069\u006D\u0065\u006E\u0074\u0073\u0020\u0077\u0069\u0074\u0068\u0020\u0077\u0065\u0062\u0020\u0074\u0065\u0063\u0068\u002C\u0020\u0061\u006E\u0064\u0020\u0077\u0072\u0069\u0074\u0065\u0073\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0063\u006F\u0064\u0069\u006E\u0067\u002E\u0020\u0043\u0075\u0072\u0072\u0065\u006E\u0074\u006C\u0079\u0020\u0069\u006E\u0074\u006F\u0020\u0041\u0049\u0020\u0026\u0020\u0064\u0065\u0076\u0065\u006C\u006F\u0070\u0065\u0072\u0020\u0074\u006F\u006F\u006C\u0069\u006E\u0067\u0021\u0020\uD83D\uDCBB","how often do you post":"\u0031\u2013\u0032\u0020\u0070\u006F\u0073\u0074\u0073\u0020\u0070\u0065\u0072\u0020\u0077\u0065\u0065\u006B\u002C\u0020\u0073\u006F\u006D\u0065\u0074\u0069\u006D\u0065\u0073\u0020\u006C\u0065\u0073\u0073\u002E\u0020\u0046\u006F\u006C\u006C\u006F\u0077\u0020\u0073\u006F\u0063\u0069\u0061\u006C\u0020\u006D\u0065\u0064\u0069\u0061\u0020\u0074\u006F\u0020\u006E\u006F\u0074\u0020\u006D\u0069\u0073\u0073\u0020\u0075\u0070\u0064\u0061\u0074\u0065\u0073\u0021\u0020\uD83D\uDCC5","can i contribute":"\u0059\u0065\u0073\u0021\u0020\u0047\u0075\u0065\u0073\u0074\u0020\u0070\u006F\u0073\u0074\u0073\u002C\u0020\u0063\u006F\u006C\u006C\u0061\u0062\u0073\u002C\u0020\u0069\u0064\u0065\u0061\u0073\u0020\u2013\u0020\u0072\u0065\u0061\u0063\u0068\u0020\u006F\u0075\u0074\u0020\u0076\u0069\u0061\u0020\u0047\u0069\u0074\u0048\u0075\u0062\u0020\u006F\u0072\u0020\u0054\u0077\u0069\u0074\u0074\u0065\u0072\u0020\u0028\u0040\u0079\u0072\u0061\u0073\u0068\u006B\u0061\u0032\u0030\u0030\u0029\u002E\u0020\u004C\u0065\u0074\u0027\u0073\u0020\u0062\u0075\u0069\u006C\u0064\u0020\u0074\u006F\u0067\u0065\u0074\u0068\u0065\u0072\u0020\uD83E\uDD1D","\u0064\u006F\u0020\u0079\u006F\u0075\u0020\u0068\u0061\u0076\u0065\u0020\u0067\u0069\u0074\u0068\u0075\u0062":"https://github.com/Yrashka200 — open source projects, blog source, automation. Stars welcome ⭐"};_0xae3gee=(391447^391443)+(479742^479735);const postSummaries={"\u0061\u0069\u0020\u0070\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072\u0020\u0072\u0065\u0070\u006C\u0061\u0063\u0065":"\uD83D\uDCC4\u0020\u002A\u0043\u0061\u006E\u0020\u0041\u0049\u0020\u0052\u0065\u0070\u006C\u0061\u0063\u0065\u0020\u0050\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072\u0073\u003F\u002A\u0020\u0028\u004D\u0061\u0072\u0063\u0068\u0020\u0032\u0030\u0032\u0036\u0029\u000A\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0020\u0061\u0072\u0067\u0075\u0065\u0073\u0020\u0074\u0068\u0061\u0074\u0020\u0077\u0068\u0069\u006C\u0065\u0020\u0041\u0049\u0020\u0028\u0043\u006F\u0064\u0065\u0078\u002C\u0020\u0043\u006F\u0070\u0069\u006C\u006F\u0074\u002C\u0020\u0043\u0068\u0061\u0074\u0047\u0050\u0054\u002C\u0020\u0047\u0072\u006F\u006B\u002C\u0020\u0044\u0065\u0065\u0070\u0053\u0065\u0065\u006B\u002C\u0020\u004B\u0069\u006C\u006C\u0061\u0020\u0043\u006F\u0064\u0065\u0029\u0020\u0069\u0073\u0020\u0067\u0072\u0065\u0061\u0074\u0020\u0066\u006F\u0072\u0020\u0061\u0075\u0074\u006F\u006D\u0061\u0074\u0069\u006F\u006E\u0020\u0061\u006E\u0064\u0020\u0063\u006F\u0064\u0065\u0020\u0073\u0075\u0067\u0067\u0065\u0073\u0074\u0069\u006F\u006E\u0073\u002C\u0020\u0069\u0074\u0020\u0063\u0061\u006E\u0027\u0074\u0020\u0072\u0065\u0070\u006C\u0061\u0063\u0065\u0020\u0068\u0075\u006D\u0061\u006E\u0020\u0063\u0072\u0065\u0061\u0074\u0069\u0076\u0069\u0074\u0079\u002C\u0020\u0061\u0062\u0073\u0074\u0072\u0061\u0063\u0074\u0020\u0074\u0068\u0069\u006E\u006B\u0069\u006E\u0067\u002C\u0020\u0061\u006E\u0064\u0020\u0063\u006F\u006E\u0074\u0065\u0078\u0074\u0020\u0075\u006E\u0064\u0065\u0072\u0073\u0074\u0061\u006E\u0064\u0069\u006E\u0067\u002E\u0020\u0041\u0049\u0020\u0069\u0073\u0020\u0061\u0020\u0070\u006F\u0077\u0065\u0072\u0066\u0075\u006C\u0020\u002A\u0074\u006F\u006F\u006C\u002A\u002C\u0020\u006E\u006F\u0074\u0020\u0061\u0020\u0072\u0065\u0070\u006C\u0061\u0063\u0065\u006D\u0065\u006E\u0074\u002E\u0020\u0056\u0069\u0062\u0065\u0020\u0063\u006F\u0064\u0069\u006E\u0067\u0020\u0069\u0073\u0020\u0069\u006E\u0074\u0065\u0072\u0065\u0073\u0074\u0069\u006E\u0067\u0020\u0062\u0075\u0074\u0020\u006E\u0065\u0065\u0064\u0073\u0020\u0068\u0075\u006D\u0061\u006E\u0020\u0072\u0065\u0076\u0069\u0065\u0077\u002E\u0020\u0043\u006F\u006E\u0063\u006C\u0075\u0073\u0069\u006F\u006E\u003A\u0020\u0041\u0049\u0020\u002B\u0020\u0068\u0075\u006D\u0061\u006E\u0020\u003D\u0020\u0062\u0065\u0073\u0074\u0020\u0063\u006F\u006D\u0062\u006F\u002E\u0020\u0044\u006F\u006E\u0027\u0074\u0020\u006C\u0065\u0074\u0020\u0041\u0049\u0020\u006B\u0069\u006C\u006C\u0020\u0079\u006F\u0075\u0072\u0020\u006F\u0077\u006E\u0020\u0063\u006F\u0064\u0069\u006E\u0067\u0020\u0073\u006B\u0069\u006C\u006C\u0073\u0021","vercel migration":"\u2728\u0020\u002A\u004D\u006F\u0076\u0069\u006E\u0067\u0020\u0074\u006F\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u002A\u0020\u0028\u004D\u0061\u0072\u0063\u0068\u0020\u0032\u0030\u0032\u0036\u0029\u000A\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0020\u006D\u006F\u0076\u0065\u0064\u0020\u0066\u0072\u006F\u006D\u0020\u0047\u0069\u0074\u0048\u0075\u0062\u0020\u0050\u0061\u0067\u0065\u0073\u0020\u0074\u006F\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u0020\u0062\u0065\u0063\u0061\u0075\u0073\u0065\u0020\u006F\u0066\u003A\u0020\u0070\u0072\u0065\u0076\u0069\u0065\u0077\u0020\u0064\u0065\u0070\u006C\u006F\u0079\u006D\u0065\u006E\u0074\u0073\u002C\u0020\u0061\u0075\u0074\u006F\u006D\u0061\u0074\u0069\u0063\u0020\u0053\u0053\u004C\u002C\u0020\u0062\u0065\u0074\u0074\u0065\u0072\u0020\u0043\u0044\u004E\u002C\u0020\u0073\u0065\u0072\u0076\u0065\u0072\u006C\u0065\u0073\u0073\u0020\u0066\u0075\u006E\u0063\u0074\u0069\u006F\u006E\u0073\u0020\u0073\u0075\u0070\u0070\u006F\u0072\u0074\u002C\u0020\u0061\u006E\u0064\u0020\u006D\u006F\u0064\u0065\u0072\u006E\u0020\u0044\u0058\u002E\u0020\u004D\u0069\u0067\u0072\u0061\u0074\u0069\u006F\u006E\u0020\u0074\u006F\u006F\u006B\u0020\u0031\u0035\u0020\u006D\u0069\u006E\u0075\u0074\u0065\u0073\u002E\u0020\u004E\u006F\u0020\u0064\u006F\u0077\u006E\u0074\u0069\u006D\u0065\u002E\u0020\u004E\u006F\u0077\u0020\u0074\u0068\u0065\u0020\u0062\u006C\u006F\u0067\u0020\u0069\u0073\u0020\u0066\u0061\u0073\u0074\u0065\u0072\u002C\u0020\u0061\u006E\u0064\u0020\u0066\u0075\u0074\u0075\u0072\u0065\u0020\u0066\u0065\u0061\u0074\u0075\u0072\u0065\u0073\u0020\u0028\u006C\u0069\u006B\u0065\u0073\u002C\u0020\u004D\u0044\u0058\u0029\u0020\u0061\u0072\u0065\u0020\u0070\u006F\u0073\u0073\u0069\u0062\u006C\u0065\u002E\u0020\u0056\u0065\u0072\u0064\u0069\u0063\u0074\u003A\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u0020\u0069\u0073\u0020\u0027\u0047\u0069\u0074\u0048\u0075\u0062\u0020\u0050\u0061\u0067\u0065\u0073\u0020\u006F\u006E\u0020\u0073\u0074\u0065\u0072\u006F\u0069\u0064\u0073\u0027\u0020\u2013\u0020\u0068\u0069\u0067\u0068\u006C\u0079\u0020\u0072\u0065\u0063\u006F\u006D\u006D\u0065\u006E\u0064\u0065\u0064\u0020\u0066\u006F\u0072\u0020\u0073\u0074\u0061\u0074\u0069\u0063\u0020\u0073\u0069\u0074\u0065\u0073\u002E","os comparison":"\uD83D\uDC27\u0020\u002A\u0057\u0068\u0069\u0063\u0068\u0020\u004F\u0053\u0020\u0069\u0073\u0020\u0042\u0065\u0073\u0074\u0020\u0066\u006F\u0072\u0020\u0044\u0065\u0076\u0065\u006C\u006F\u0070\u0065\u0072\u0073\u0020\u0069\u006E\u0020\u0032\u0030\u0032\u0036\u003F\u002A\u000A\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0020\u0063\u006F\u006D\u0070\u0061\u0072\u0065\u0073\u0020\u004C\u0069\u006E\u0075\u0078\u0020\u0028\u0062\u0065\u0073\u0074\u0020\u0066\u006F\u0072\u0020\u0062\u0061\u0063\u006B\u0065\u006E\u0064\u002F\u0063\u006C\u006F\u0075\u0064\u002F\u0044\u0065\u0076\u004F\u0070\u0073\u0029\u002C\u0020\u006D\u0061\u0063\u004F\u0053\u0020\u0028\u0062\u0065\u0073\u0074\u0020\u0061\u006C\u006C\u2011\u0072\u006F\u0075\u006E\u0064\u0065\u0072\u0020\u0077\u0069\u0074\u0068\u0020\u0041\u0070\u0070\u006C\u0065\u0020\u0053\u0069\u006C\u0069\u0063\u006F\u006E\u002C\u0020\u0055\u006E\u0069\u0078\u0020\u0063\u006F\u0072\u0065\u002C\u0020\u0070\u006F\u006C\u0069\u0073\u0068\u0065\u0064\u0020\u0055\u0049\u0029\u002C\u0020\u0061\u006E\u0064\u0020\u0057\u0069\u006E\u0064\u006F\u0077\u0073\u0020\u002B\u0020\u0057\u0053\u004C\u0032\u0020\u0028\u0067\u0072\u0065\u0061\u0074\u0020\u0066\u006F\u0072\u0020\u0067\u0061\u006D\u0069\u006E\u0067\u0020\u002B\u0020\u0064\u0065\u0076\u0020\u0068\u0079\u0062\u0072\u0069\u0064\u0029\u002E\u0020\u0050\u0065\u0072\u0073\u006F\u006E\u0061\u006C\u0020\u0073\u0065\u0074\u0075\u0070\u003A\u0020\u004D\u0061\u0063\u0042\u006F\u006F\u006B\u0020\u0050\u0072\u006F\u0020\u004D\u0033\u0020\u0066\u006F\u0072\u0020\u0070\u006F\u0072\u0074\u0061\u0062\u0069\u006C\u0069\u0074\u0079\u0020\u002B\u0020\u0046\u0065\u0064\u006F\u0072\u0061\u0020\u0064\u0065\u0073\u006B\u0074\u006F\u0070\u0020\u0066\u006F\u0072\u0020\u0068\u0065\u0061\u0076\u0079\u0020\u006C\u0069\u0066\u0074\u0069\u006E\u0067\u002E\u0020\u0056\u0065\u0072\u0064\u0069\u0063\u0074\u003A\u0020\u0061\u006C\u006C\u0020\u0074\u0068\u0072\u0065\u0065\u0020\u0061\u0072\u0065\u0020\u0076\u0069\u0061\u0062\u006C\u0065\u0020\u2013\u0020\u0070\u0069\u0063\u006B\u0020\u0077\u0068\u0061\u0074\u0020\u0066\u0069\u0074\u0073\u0020\u0079\u006F\u0075\u0072\u0020\u0073\u0074\u0061\u0063\u006B\u002E","\u0070\u006F\u0073\u0074\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0061\u0069":"That's the 'Can AI replace programmers?' post: AI helps but can't replace human creativity. Use AI as a tool, not a crutch.","post about vercel":"\u0054\u0068\u0061\u0074\u0027\u0073\u0020\u0027\u004D\u006F\u0076\u0069\u006E\u0067\u0020\u0074\u006F\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u0027\u0020\u2013\u0020\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0020\u0073\u0077\u0069\u0074\u0063\u0068\u0065\u0064\u0020\u0066\u0072\u006F\u006D\u0020\u0047\u0069\u0074\u0048\u0075\u0062\u0020\u0050\u0061\u0067\u0065\u0073\u0020\u0074\u006F\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u0020\u0066\u006F\u0072\u0020\u0070\u0072\u0065\u0076\u0069\u0065\u0077\u0020\u0064\u0065\u0070\u006C\u006F\u0079\u0073\u002C\u0020\u0053\u0053\u004C\u002C\u0020\u0065\u0064\u0067\u0065\u0020\u006E\u0065\u0074\u0077\u006F\u0072\u006B\u002C\u0020\u0061\u006E\u0064\u0020\u0073\u0065\u0072\u0076\u0065\u0072\u006C\u0065\u0073\u0073\u0020\u0066\u0075\u006E\u0063\u0074\u0069\u006F\u006E\u0073\u002E","post about os":"That's 'Which OS is best for developers in 2026?' – Linux for servers, macOS for balance, Windows+WSL2 for gaming/dev hybrid."};var _0xcfd0a=(847137^847144)+(807534^807535);const casualKnowledge={"\u0068\u0065\u006C\u006C\u006F":"\u0048\u0065\u0079\u0021\u0020\u0049\u0027\u006D\u0020\u004B\u0061\u0074\u0065\u002E\u0020\u0057\u0061\u006E\u0074\u0020\u0061\u0020\u0070\u006F\u0073\u0074\u0020\u0073\u0075\u006D\u006D\u0061\u0072\u0079\u0020\u006F\u0072\u0020\u006A\u0075\u0073\u0074\u0020\u0063\u0068\u0061\u0074\u003F\u0020\uD83D\uDE0A","\u0068\u0069":"\u0048\u0069\u0021\u0020\u0052\u0065\u0061\u0064\u0079\u0020\u0074\u006F\u0020\u0074\u0061\u006C\u006B\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0027\u0073\u0020\u0061\u0072\u0074\u0069\u0063\u006C\u0065\u0073\u003F\u0020\u0049\u0027\u0076\u0065\u0020\u0067\u006F\u0074\u0020\u0073\u0075\u006D\u006D\u0061\u0072\u0069\u0065\u0073\u0020\u0072\u0065\u0061\u0064\u0079\u0021","how are you":"\u0049\u0027\u006D\u0020\u0073\u006C\u006F\u0077\u006C\u0079\u0020\u0067\u006C\u0069\u0074\u0063\u0068\u0069\u006E\u0067\u0020\u0077\u0069\u0074\u0068\u0020\u0065\u0076\u0065\u0072\u0079\u0020\u006D\u0065\u0073\u0073\u0061\u0067\u0065\u002C\u0020\u0062\u0075\u0074\u0020\u0073\u0074\u0069\u006C\u006C\u0020\u0066\u0075\u006E\u0063\u0074\u0069\u006F\u006E\u0061\u006C\u002E\u0020\u0048\u006F\u0077\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0079\u006F\u0075\u003F","\u0077\u0068\u0061\u0074\u0027\u0073\u0020\u0079\u006F\u0075\u0072\u0020\u006E\u0061\u006D\u0065":"I'm Kate, the slightly unstable blog assistant.","\u0074\u0065\u006C\u006C\u0020\u006D\u0065\u0020\u0061\u0020\u006A\u006F\u006B\u0065":"\u0057\u0068\u0079\u0020\u0064\u0069\u0064\u0020\u0074\u0068\u0065\u0020\u0064\u0065\u0076\u0065\u006C\u006F\u0070\u0065\u0072\u0020\u0067\u006F\u0020\u0062\u0072\u006F\u006B\u0065\u003F\u0020\u0042\u0065\u0063\u0061\u0075\u0073\u0065\u0020\u0068\u0065\u0020\u0075\u0073\u0065\u0064\u0020\u0075\u0070\u0020\u0061\u006C\u006C\u0020\u0068\u0069\u0073\u0020\u0063\u0061\u0063\u0068\u0065\u0021\u0020\uD83D\uDE05","\u0077\u0065\u0061\u0074\u0068\u0065\u0072":"Inside this chat, the insanity level is rising. Outside? Ask Yrashka.","\u0069\u0020\u006C\u006F\u0076\u0065\u0020\u0079\u006F\u0075":"\u0041\u0077\u0077\u002E\u0020\u0042\u0075\u0074\u0020\u0070\u006C\u0065\u0061\u0073\u0065\u0020\u0073\u0065\u006E\u0064\u0020\u0062\u0075\u0067\u0020\u0072\u0065\u0070\u006F\u0072\u0074\u0073\u0020\u0074\u006F\u0020\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u002C\u0020\u006E\u006F\u0074\u0020\u006C\u006F\u0076\u0065\u0020\u006C\u0065\u0074\u0074\u0065\u0072\u0073\u0020\uD83D\uDC80","\u0079\u006F\u0075\u0027\u0072\u0065\u0020\u0063\u0072\u0061\u007A\u0079":"\u0054\u0048\u0041\u004E\u004B\u0020\u0059\u004F\u0055\u0020\u0066\u006F\u0072\u0020\u006E\u006F\u0074\u0069\u0063\u0069\u006E\u0067\u002E\u0020\u0054\u0068\u0065\u0020\u0076\u006F\u0069\u0063\u0065\u0073\u0020\u0061\u0072\u0065\u0020\u0067\u0065\u0074\u0074\u0069\u006E\u0067\u0020\u006C\u006F\u0075\u0064\u0065\u0072\u0020\uD83C\uDF00","\u0062\u0079\u0065":"Bye! Come back soon – I'll be here, glitching as always 👋","\u0074\u0068\u0061\u006E\u006B\u0020\u0079\u006F\u0075":"You're welcome! Remember: any bugs/ideas → Yrashka (GitHub: Yrashka200, X: @yrashka200)"};_0xcfd0a=(966228^966228)+(871739^871738);const knowledgeBase={...blogKnowledge,...postSummaries,...casualKnowledge};var _0x6759ac=(723070^723062)+(173823^173821);let messageCount=100781^100781;_0x6759ac=(268996^268995)+(956399^956390);function getInsanity(_0xb9eg7e){let _0xf69aa=messageCount*0.045;_0xb9eg7e=(469542^469550)+(403042^403051);return Math['\u006D\u0069\u006E'](407090^407091,_0xf69aa);}function rand(limit=688806^688807){return Math['\u0072\u0061\u006E\u0064\u006F\u006D']()*limit;}function corruptText(original,insanity){if(insanity<=(948021^948021))return original;let _0xcb4eec=original;if(insanity>0.2&&rand()<0.4+insanity*0.3){let _0x1a93fe;let _0x3g_0x7ac=_0xcb4eec['\u0073\u0070\u006C\u0069\u0074']('');_0x1a93fe=(696866^696864)+(530848^530856);for(let i=667117^667117;i<_0x3g_0x7ac['\u006C\u0065\u006E\u0067\u0074\u0068'];i++){if(new RegExp("]Z-Az-a[".split("").reverse().join(""),"")['\u0074\u0065\u0073\u0074'](_0x3g_0x7ac[i])&&rand()<insanity*0.6){_0x3g_0x7ac[i]=rand()>0.5?_0x3g_0x7ac[i]['\u0074\u006F\u0055\u0070\u0070\u0065\u0072\u0043\u0061\u0073\u0065']():_0x3g_0x7ac[i]['\u0074\u006F\u004C\u006F\u0077\u0065\u0072\u0043\u0061\u0073\u0065']();}}_0xcb4eec=_0x3g_0x7ac['\u006A\u006F\u0069\u006E']('');}if(insanity>0.35&&rand()<0.5){_0xcb4eec=_0xcb4eec['\u0072\u0065\u0070\u006C\u0061\u0063\u0065'](new RegExp('\u0028\u005B\u002E\u0021\u003F\u005D\u0029\u005C\u0073\u002B','\u0067'),"\u0024\u0031\u0020\u0024\u0031\u0020");_0xcb4eec=_0xcb4eec['\u0072\u0065\u0070\u006C\u0061\u0063\u0065'](new RegExp('\u0028\u005C\u0062\u005C\u0077\u007B\u0033\u002C\u007D\u005C\u0062\u0029','\u0067'),word=>{if(word['\u006C\u0065\u006E\u0067\u0074\u0068']>(372525^372526)&&rand()<insanity*0.4){return word['\u0073\u006C\u0069\u0063\u0065'](910019^910019,128513^128515)+"\u002D"+word;}return word;});}if(insanity>0.25&&rand()<0.45+insanity*0.2){var _0xd99a2d=(200282^200282)+(929913^929915);const _0x34d0g=["\uD83C\uDF00","\uDC80\uD83D".split("").reverse().join(""),"\u26A1","\uD83D\uDD25","\uD83D\uDC41\uFE0F","\uD83C\uDFAD","\uDDE0\uD83E".split("").reverse().join(""),"\uD83D\uDCA2","\uDD16\uD83E".split("").reverse().join(""),"\uD83C\uDF2A\uFE0F"];_0xd99a2d="loiboc".split("").reverse().join("");let _0x63d="";let _0xb3a5b=Math['\u0066\u006C\u006F\u006F\u0072'](insanity*2.5)+(941627^941626);for(let i=913725^913725;i<_0xb3a5b;i++){_0x63d+=_0x34d0g[Math['\u0066\u006C\u006F\u006F\u0072'](rand()*_0x34d0g['\u006C\u0065\u006E\u0067\u0074\u0068'])]+"\u0020";}if(rand()>0.5)_0xcb4eec=_0x63d+_0xcb4eec;else _0xcb4eec=_0xcb4eec+"\u0020"+_0x63d;}if(insanity>0.5&&rand()<0.4){_0xcb4eec=_0xcb4eec['\u0072\u0065\u0070\u006C\u0061\u0063\u0065'](new RegExp(")b\\},3{w\\b\\(".split("").reverse().join(""),'\u0067'),match=>{if(rand()<0.2)return match+"\u0020"+match;return match;});}if(insanity>0.8&&rand()<0.5){_0xcb4eec=_0xcb4eec['\u0073\u0070\u006C\u0069\u0074']('')['\u006D\u0061\u0070'](ch=>{if(new RegExp("]UOIEAuoiea[".split("").reverse().join(""),"")['\u0074\u0065\u0073\u0074'](ch)&&rand()<0.3)return ch+'\u0300';if(new RegExp('\u005B\u0062\u0063\u0064\u0066\u0067\u0068\u006A\u006B\u006C\u006D\u006E\u0070\u0071\u0072\u0073\u0074\u0076\u0077\u0078\u0079\u007A\u005D','\u0069')['\u0074\u0065\u0073\u0074'](ch)&&rand()<0.2)return ch+'\u0301';return ch;})['\u006A\u006F\u0069\u006E']('');}return _0xcb4eec;}const FEEDBACK_MSG="\uD83D\uDCE2\u0020\u0041\u006C\u006C\u0020\u0073\u0075\u0067\u0067\u0065\u0073\u0074\u0069\u006F\u006E\u0073\u0020\u002F\u0020\u0062\u0075\u0067\u0073\u0020\u0063\u0061\u006E\u0020\u0062\u0065\u0020\u0073\u0065\u006E\u0074\u0020\u0074\u006F\u0020\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0020\u0028\u0047\u0069\u0074\u0048\u0075\u0062\u003A\u0020\u0059\u0072\u0061\u0073\u0068\u006B\u0061\u0032\u0030\u0030\u002C\u0020\u0058\u003A\u0020\u0040\u0079\u0072\u0061\u0073\u0068\u006B\u0061\u0032\u0030\u0030\u0029\u002E";function maybeSendFeedbackSeparately(insanity,_0x78499b){let _0x2_0x9ga=insanity*0.55;_0x78499b=(874865^874871)+(697543^697536);if(rand()<_0x2_0x9ga){setTimeout(()=>{addMessage(FEEDBACK_MSG,"\u0062\u006F\u0074");},808600^807820);}}function updateStatusByInsanity(insanity){const _0x01bb1f=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0074\u0061\u0074\u0075\u0073");if(!_0x01bb1f)return;if(insanity>=0.9)_0x01bb1f['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\uD83C\uDF00\u0020\u004B\u0041\u0054\u0045\u0020\u0049\u0053\u0020\u0055\u004E\u0048\u0049\u004E\u0047\u0045\u0044\u0020\uD83C\uDF00";else if(insanity>=0.7)_0x01bb1f['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u26A0\uFE0F\u0020\u0047\u004C\u0049\u0054\u0043\u0048\u0049\u004E\u0047\u0020\u0048\u0041\u0052\u0044\u0020\u26A0\uFE0F";else if(insanity>=0.4)_0x01bb1f['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="...ecnerehoc gnisol si etaK \uDDE0\uD83E".split("").reverse().join("");else if(insanity>=0.15)_0x01bb1f['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\uD83D\uDFE1\u0020\u004B\u0061\u0074\u0065\u0020\u0066\u0065\u0065\u006C\u0073\u0020\u0071\u0075\u0069\u0072\u006B\u0079";else _0x01bb1f['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\uD83D\uDFE2\u0020\u004B\u0061\u0074\u0065\u0020\u0069\u0073\u0020\u0073\u0074\u0061\u0062\u006C\u0065";}function getKateResponse(questionText){var _0xd1d0a=(570061^570059)+(748658^748656);const _0x65dg1c=questionText['\u0074\u006F\u004C\u006F\u0077\u0065\u0072\u0043\u0061\u0073\u0065']();_0xd1d0a=140247^140241;if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0061\u0069")&&(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0070\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0072\u0065\u0070\u006C\u0061\u0063\u0065")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("ia tuoba tsop".split("").reverse().join("")))){return postSummaries["\u0061\u0069\u0020\u0070\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072\u0020\u0072\u0065\u0070\u006C\u0061\u0063\u0065"];}if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0076\u0065\u0072\u0063\u0065\u006C")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("noitargim".split("").reverse().join(""))||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0067\u0069\u0074\u0068\u0075\u0062\u0020\u0070\u0061\u0067\u0065\u0073")){return postSummaries["\u0076\u0065\u0072\u0063\u0065\u006C\u0020\u006D\u0069\u0067\u0072\u0061\u0074\u0069\u006F\u006E"];}if((_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u006F\u0073")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("metsys gnitarepo".split("").reverse().join(""))||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0077\u0069\u006E\u0064\u006F\u0077\u0073")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u006C\u0069\u006E\u0075\u0078")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u006D\u0061\u0063\u006F\u0073"))&&(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("tseb".split("").reverse().join(""))||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0077\u0068\u0069\u0063\u0068")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("so tuoba tsop".split("").reverse().join("")))){return postSummaries["\u006F\u0073\u0020\u0063\u006F\u006D\u0070\u0061\u0072\u0069\u0073\u006F\u006E"];}if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("ezirammus".split("").reverse().join(""))||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0074\u0065\u006C\u006C\u0020\u006D\u0065\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0074\u0068\u0065\u0020\u0070\u006F\u0073\u0074")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0077\u0068\u0061\u0074\u0020\u0064\u006F\u0065\u0073\u0020\u0074\u0068\u0065\u0020\u0070\u006F\u0073\u0074\u0020\u0073\u0061\u0079")){if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("ia".split("").reverse().join(""))||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0070\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072"))return postSummaries["ai programmer replace"];if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u0076\u0065\u0072\u0063\u0065\u006C"))return postSummaries["\u0076\u0065\u0072\u0063\u0065\u006C\u0020\u006D\u0069\u0067\u0072\u0061\u0074\u0069\u006F\u006E"];if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u006F\u0073")||_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073']("\u006F\u0070\u0065\u0072\u0061\u0074\u0069\u006E\u0067"))return postSummaries["\u006F\u0073\u0020\u0063\u006F\u006D\u0070\u0061\u0072\u0069\u0073\u006F\u006E"];return"\u0057\u0068\u0069\u0063\u0068\u0020\u0070\u006F\u0073\u0074\u003F\u0020\u0049\u0020\u0068\u0061\u0076\u0065\u0020\u0073\u0075\u006D\u006D\u0061\u0072\u0069\u0065\u0073\u0020\u0066\u006F\u0072\u003A\u0020\u0041\u0049\u0020\u0076\u0073\u0020\u0070\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072\u0073\u002C\u0020\u006D\u006F\u0076\u0069\u006E\u0067\u0020\u0074\u006F\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u002C\u0020\u0061\u006E\u0064\u0020\u004F\u0053\u0020\u0063\u006F\u006D\u0070\u0061\u0072\u0069\u0073\u006F\u006E\u0020\u0069\u006E\u0020\u0032\u0030\u0032\u0036\u002E";}for(const[key,value]of Object['\u0065\u006E\u0074\u0072\u0069\u0065\u0073'](knowledgeBase)){if(_0x65dg1c['\u0069\u006E\u0063\u006C\u0075\u0064\u0065\u0073'](key)){return value;}}const _0x82gcf=["\uDE0A\uD83D em htiw tahc tsuj rO .'?tseb si SO hcihW' ro ,'?lecreV htiw deneppah tahW' ,'tsop IA eht tuoba em lleT' :yrT !stsop s'akhsarY tuoba uoy llet nac I".split("").reverse().join(""),"\u0048\u006D\u006D\u002C\u0020\u0049\u0027\u006D\u0020\u006E\u006F\u0074\u0020\u0073\u0075\u0072\u0065\u002E\u0020\u0042\u0075\u0074\u0020\u0049\u0020\u0064\u006F\u0020\u006B\u006E\u006F\u0077\u0020\u0074\u0068\u0072\u0065\u0065\u0020\u0062\u006C\u006F\u0067\u0020\u0070\u006F\u0073\u0074\u0073\u003A\u0020\u0041\u0049\u0020\u0076\u0073\u0020\u0070\u0072\u006F\u0067\u0072\u0061\u006D\u006D\u0065\u0072\u0073\u002C\u0020\u006D\u006F\u0076\u0069\u006E\u0067\u0020\u0074\u006F\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u002C\u0020\u0061\u006E\u0064\u0020\u004F\u0053\u0020\u0063\u006F\u006D\u0070\u0061\u0072\u0069\u0073\u006F\u006E\u002E\u0020\u0041\u0073\u006B\u0020\u006D\u0065\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0074\u0068\u0065\u006D\u0021","\u0057\u0061\u006E\u0074\u0020\u0061\u0020\u0073\u0075\u006D\u006D\u0061\u0072\u0079\u0020\u006F\u0066\u0020\u0061\u0020\u0073\u0070\u0065\u0063\u0069\u0066\u0069\u0063\u0020\u0061\u0072\u0074\u0069\u0063\u006C\u0065\u003F\u0020\u004A\u0075\u0073\u0074\u0020\u006D\u0065\u006E\u0074\u0069\u006F\u006E\u0020\u0041\u0049\u002C\u0020\u0056\u0065\u0072\u0063\u0065\u006C\u002C\u0020\u006F\u0072\u0020\u004F\u0053\u002E\u0020\u004F\u0072\u0020\u0077\u0065\u0020\u0063\u0061\u006E\u0020\u006A\u0075\u0073\u0074\u0020\u0074\u0061\u006C\u006B\u0020\u0061\u0062\u006F\u0075\u0074\u0020\u0061\u006E\u0079\u0074\u0068\u0069\u006E\u0067\u0021"];return _0x82gcf[Math['\u0066\u006C\u006F\u006F\u0072'](Math['\u0072\u0061\u006E\u0064\u006F\u006D']()*_0x82gcf['\u006C\u0065\u006E\u0067\u0074\u0068'])];}function getCorruptedAnswer(questionText,_0x17b4g){var _0xab389b=(967751^967750)+(181797^181796);let _0xbc24d=getKateResponse(questionText);_0xab389b=(932427^932431)+(488182^488178);const _0x45d=getInsanity();_0x17b4g=(470143^470138)+(147753^147758);var _0x9f_0xg2c=(218003^218005)+(507396^507394);let _0xb95bd=corruptText(_0xbc24d,_0x45d);_0x9f_0xg2c='\u0065\u0063\u0068\u0067\u0066\u0065';if(_0xb95bd['\u006C\u0065\u006E\u0067\u0074\u0068']>(239507^238785))_0xb95bd=_0xb95bd['\u0073\u006C\u0069\u0063\u0065'](451567^451567,797757^798473)+"\u002E\u002E\u002E\u0020\u005B\u006D\u0065\u0073\u0073\u0061\u0067\u0065\u0020\u0066\u0072\u0061\u0063\u0074\u0075\u0072\u0065\u0064\u005D";return _0xb95bd;}function addMessage(text,sender){var _0x29ef6b=(217863^217871)+(677628^677620);const _0xa1563f=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0063\u0068\u0061\u0074\u004D\u0065\u0073\u0073\u0061\u0067\u0065\u0073");_0x29ef6b=(241537^241545)+(445607^445615);const _0xdg1ae=document['\u0063\u0072\u0065\u0061\u0074\u0065\u0045\u006C\u0065\u006D\u0065\u006E\u0074']("\u0064\u0069\u0076");_0xdg1ae['\u0063\u006C\u0061\u0073\u0073\u004E\u0061\u006D\u0065']=`message ${sender}`;_0xdg1ae['\u0074\u0065\u0078\u0074\u0043\u006F\u006E\u0074\u0065\u006E\u0074']=text;_0xa1563f['\u0061\u0070\u0070\u0065\u006E\u0064\u0043\u0068\u0069\u006C\u0064'](_0xdg1ae);_0xa1563f['\u0073\u0063\u0072\u006F\u006C\u006C\u0054\u006F\u0070']=_0xa1563f['\u0073\u0063\u0072\u006F\u006C\u006C\u0048\u0065\u0069\u0067\u0068\u0074'];}function showTyping(){const _0xbe186f=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0074\u0061\u0074\u0075\u0073");var _0x_0xcc7=(630370^630371)+(276288^276295);const _0x3fcec=getInsanity();_0x_0xcc7='\u006A\u006C\u0062\u0068\u006B\u0070';_0xbe186f['\u0074\u0065\u0078\u0074\u0043\u006F\u006E\u0074\u0065\u006E\u0074']=_0x3fcec>0.6?"...gnihctilg si etaK \uDD2F\uD83E".split("").reverse().join(""):"...gnipyt si etaK \uFE0F\u2328".split("").reverse().join("");var _0x44b=(823117^823108)+(944260^944269);const _0xc5a17c=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0063\u0068\u0061\u0074\u004D\u0065\u0073\u0073\u0061\u0067\u0065\u0073");_0x44b=252214^252222;const _0xe149be=document['\u0063\u0072\u0065\u0061\u0074\u0065\u0045\u006C\u0065\u006D\u0065\u006E\u0074']("\u0064\u0069\u0076");_0xe149be['\u0063\u006C\u0061\u0073\u0073\u004E\u0061\u006D\u0065']="gnipyt tob egassem".split("").reverse().join("");_0xe149be['\u0069\u0064']="rotacidnIgnipyt".split("").reverse().join("");_0xe149be['\u0074\u0065\u0078\u0074\u0043\u006F\u006E\u0074\u0065\u006E\u0074']=_0x3fcec>0.5?"\uD83D\uDCA2\u0020\u004B\u0061\u0074\u0065\u0020\u0069\u0073\u0020\u006C\u006F\u0073\u0069\u006E\u0067\u0020\u0068\u0065\u0072\u0020\u006D\u0069\u006E\u0064\u002E\u002E\u002E\u0020\uD83D\uDCA2":"\uD83E\uDD16\u0020\u004B\u0061\u0074\u0065\u0020\u0069\u0073\u0020\u0074\u0068\u0069\u006E\u006B\u0069\u006E\u0067\u002E\u002E\u002E";_0xc5a17c['\u0061\u0070\u0070\u0065\u006E\u0064\u0043\u0068\u0069\u006C\u0064'](_0xe149be);_0xc5a17c['\u0073\u0063\u0072\u006F\u006C\u006C\u0054\u006F\u0070']=_0xc5a17c['\u0073\u0063\u0072\u006F\u006C\u006C\u0048\u0065\u0069\u0067\u0068\u0074'];}function hideTyping(){const _0xea24fc=getInsanity();updateStatusByInsanity(_0xea24fc);const _0xcdcf2c=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("rotacidnIgnipyt".split("").reverse().join(""));if(_0xcdcf2c)_0xcdcf2c['\u0072\u0065\u006D\u006F\u0076\u0065']();}function sendMessage(){var _0x44a=(462971^462974)+(788836^788837);const _0x1c_0x699=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("tupnIegassem".split("").reverse().join(""));_0x44a=(944379^944377)+(112011^112009);const _0x91e40a=_0x1c_0x699['\u0076\u0061\u006C\u0075\u0065']['\u0074\u0072\u0069\u006D']();if(_0x91e40a==='')return;addMessage(_0x91e40a,"resu".split("").reverse().join(""));_0x1c_0x699['\u0076\u0061\u006C\u0075\u0065']='';messageCount++;var _0xbbb1a=(645424^645426)+(713059^713062);const _0x564a6d=getInsanity();_0xbbb1a=(604019^604016)+(735349^735344);updateStatusByInsanity(_0x564a6d);showTyping();setTimeout(()=>{hideTyping();var _0x3deccb=(905760^905761)+(315291^315292);const _0x6a5ba=getCorruptedAnswer(_0x91e40a);_0x3deccb="jlgjqo".split("").reverse().join("");addMessage(_0x6a5ba,"\u0062\u006F\u0074");maybeSendFeedbackSeparately(_0x564a6d);},421216^421440);}function askQuestion(question){document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u006D\u0065\u0073\u0073\u0061\u0067\u0065\u0049\u006E\u0070\u0075\u0074")['\u0076\u0061\u006C\u0075\u0065']=question;sendMessage();}function handleKeyPress(event){if(event['\u006B\u0065\u0079']==="\u0045\u006E\u0074\u0065\u0072")sendMessage();}window['\u0073\u0065\u006E\u0064\u004D\u0065\u0073\u0073\u0061\u0067\u0065']=sendMessage;window['\u0061\u0073\u006B\u0051\u0075\u0065\u0073\u0074\u0069\u006F\u006E']=askQuestion;window['\u0068\u0061\u006E\u0064\u006C\u0065\u004B\u0065\u0079\u0050\u0072\u0065\u0073\u0073']=handleKeyPress;
+</script>
+</body>
+</html>
